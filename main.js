@@ -1,6 +1,6 @@
 var addDiv = $('<li>Add div</li>').attr('id', 'add_div')
 var addP = $('<li>Add p</li>').attr('id', 'add_p')
-var addText = $('<li>Add text</li>').attr('id', 'add_text')
+var addText = $('<li>Change text</li>').attr('id', 'change_text')
 var elemId = 0
 
 $(function () {
@@ -29,9 +29,16 @@ var addSomething = function (element) {
       addElement(element.parent().parent(), '<p></p>')
       removeMenu()
       break
-    case 'add_text':
-      addTxt(element.parent().parent(), 'text')
-      removeMenu()
+    case 'change_text':
+      if ($('#text_form').val() === undefined) { //only run if there is no other text box already up
+        element.append('<form id="text_form"><input type="text" id="input_text"><input type="submit">').submit(function (event) {
+          event.preventDefault()
+          var $input = $('#text_form :input#input_text')
+          addTxt(element.parent().parent(), $input.val())
+          addText.find('#text_form').remove()
+          removeMenu()
+        })
+      }
       break
   }
 }
