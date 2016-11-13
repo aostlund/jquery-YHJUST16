@@ -1,6 +1,14 @@
 var addDiv = $('<li>Add div</li>').attr('id', 'add_div')
 var addP = $('<li>Add p</li>').attr('id', 'add_p')
 var addText = $('<li>Change text</li>').attr('id', 'change_text')
+var changeBgColor = $('<li>Change background color</p>').attr('id', 'change_bg_color')
+var changeTextColor = $('<li>Change text color</p>').attr('id', 'change_text_color')
+var red = $('<li></li>').attr('style', 'background: #f00').attr('id', 'red')
+var green = $('<li></li>').attr('style', 'background: #0f0').attr('id', 'green')
+var blue = $('<li></li>').attr('style', 'background: #00f').attr('id', 'blue')
+var black = $('<li></li>').attr('style', 'background: #000').attr('id', 'black')
+var white = $('<li></li>').attr('style', 'background: #fff').attr('id', 'white')
+var colors = $('<ul></ul>').attr('id', 'colors').append(red, green, blue, black, white)
 var elemId = 0
 
 $(function () {
@@ -9,17 +17,17 @@ $(function () {
       showMenu($(this))
     }
   })
-  $('#container').on('click', 'li', function () {
-    addSomething($(this))
+  $('#container').on('click', 'li', function (event) {
+    addSomething($(this), event)
   })
 })
 
 var showMenu = function (element) {
-  element.append($('<ul></ul>').attr('id', 'add_ul'))
-  $('#add_ul').append(addDiv, addText, addP)
+  element.append($('<ul></ul>').attr('id', 'add_ul').attr('style', 'background: grey'))
+  $('#add_ul').append(addDiv, addText, addP, changeBgColor, changeTextColor)
 }
 
-var addSomething = function (element) {
+var addSomething = function (element, event) {
   switch (element.attr('id')) {
     case 'add_div':
       addElement(element.parent().parent(), '<div></div>')
@@ -39,6 +47,66 @@ var addSomething = function (element) {
           removeMenu()
         })
       }
+      break
+    case 'change_bg_color':
+      if (event.target.id === element.attr('id')) {
+        element.append(colors)
+      }
+      break
+    case 'change_text_color':
+      if (event.target.id === element.attr('id')) {
+        element.append(colors)
+      }
+      break
+    case 'red':     
+      if (element.parent().parent().attr('id') == 'change_bg_color') {
+        changeBackgroundColor(element.parent().parent().parent().parent(), '#f00')
+        changeBgColor.find('#colors').remove()
+      } else {
+        changeTxtColor(element.parent().parent().parent().parent(), '#f00')
+        changeTextColor.find('#colors').remove()
+      }
+      removeMenu()
+      break
+    case 'green':     
+      if (element.parent().parent().attr('id') == 'change_bg_color') {
+        changeBackgroundColor(element.parent().parent().parent().parent(), '#0f0')
+        changeBgColor.find('#colors').remove()
+      } else {
+        changeTxtColor(element.parent().parent().parent().parent(), '#0f0')
+        changeTextColor.find('#colors').remove()
+      }
+      removeMenu()
+      break
+    case 'blue':     
+      if (element.parent().parent().attr('id') == 'change_bg_color') {
+        changeBackgroundColor(element.parent().parent().parent().parent(), '#00f')
+        changeBgColor.find('#colors').remove()
+      } else {
+        changeTxtColor(element.parent().parent().parent().parent(), '#00f')
+        changeTextColor.find('#colors').remove()
+      }
+      removeMenu()
+      break
+    case 'black':     
+      if (element.parent().parent().attr('id') == 'change_bg_color') {
+        changeBackgroundColor(element.parent().parent().parent().parent(), '#000')
+        changeBgColor.find('#colors').remove()
+      } else {
+        changeTxtColor(element.parent().parent().parent().parent(), '#000')
+        changeTextColor.find('#colors').remove()
+      }
+      removeMenu()
+      break
+    case 'white':     
+      if (element.parent().parent().attr('id') == 'change_bg_color') {
+        changeBackgroundColor(element.parent().parent().parent().parent(), '#fff')
+        changeBgColor.find('#colors').remove()
+      } else {
+        changeTxtColor(element.parent().parent().parent().parent(), '#fff')
+        changeTextColor.find('#colors').remove()
+      }
+      removeMenu()
       break
   }
 }
@@ -61,6 +129,14 @@ var addTxt = function (element, text) {
   var deepWithDataAndEvents = true;
   var temp = element.children().clone(withDataAndEvents, deepWithDataAndEvents) //uses clone(true, true) to make the copy contain the eventhandlers of the children
   element.text(text).append(temp)
+}
+
+var changeBackgroundColor = function(element, color) {
+  element.css('background', color)
+}
+
+var changeTxtColor = function(element, color) {
+  element.css('color',  color)
 }
 
 var removeMenu = function() {
