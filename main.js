@@ -59,54 +59,19 @@ var addSomething = function (element, event) {
       }
       break
     case 'red':     
-      if (element.parent().parent().attr('id') == 'change_bg_color') {
-        changeBackgroundColor(element.parent().parent().parent().parent(), '#f00')
-        changeBgColor.find('#colors').remove()
-      } else {
-        changeTxtColor(element.parent().parent().parent().parent(), '#f00')
-        changeTextColor.find('#colors').remove()
-      }
-      removeMenu()
+      changeColor(element, '#f00')
       break
     case 'green':     
-      if (element.parent().parent().attr('id') == 'change_bg_color') {
-        changeBackgroundColor(element.parent().parent().parent().parent(), '#0f0')
-        changeBgColor.find('#colors').remove()
-      } else {
-        changeTxtColor(element.parent().parent().parent().parent(), '#0f0')
-        changeTextColor.find('#colors').remove()
-      }
-      removeMenu()
+      changeColor(element, '#0f0')
       break
     case 'blue':     
-      if (element.parent().parent().attr('id') == 'change_bg_color') {
-        changeBackgroundColor(element.parent().parent().parent().parent(), '#00f')
-        changeBgColor.find('#colors').remove()
-      } else {
-        changeTxtColor(element.parent().parent().parent().parent(), '#00f')
-        changeTextColor.find('#colors').remove()
-      }
-      removeMenu()
+      changeColor(element, '#00f')
       break
     case 'black':     
-      if (element.parent().parent().attr('id') == 'change_bg_color') {
-        changeBackgroundColor(element.parent().parent().parent().parent(), '#000')
-        changeBgColor.find('#colors').remove()
-      } else {
-        changeTxtColor(element.parent().parent().parent().parent(), '#000')
-        changeTextColor.find('#colors').remove()
-      }
-      removeMenu()
+      changeColor(element, '#000')
       break
     case 'white':     
-      if (element.parent().parent().attr('id') == 'change_bg_color') {
-        changeBackgroundColor(element.parent().parent().parent().parent(), '#fff')
-        changeBgColor.find('#colors').remove()
-      } else {
-        changeTxtColor(element.parent().parent().parent().parent(), '#fff')
-        changeTextColor.find('#colors').remove()
-      }
-      removeMenu()
+      changeColor(element, '#fff')
       break
   }
 }
@@ -130,6 +95,17 @@ var addTxt = function (element, text) {
   var temp = element.children().clone(withDataAndEvents, deepWithDataAndEvents) //uses clone(true, true) to make the copy contain the eventhandlers of the children
   element.text(text).append(temp)
 }
+
+var changeColor = function(element, color) {
+  if (element.parent().parent().attr('id') == 'change_bg_color') {
+    changeBackgroundColor(element.parent().parent().parent().parent(), color)
+    changeBgColor.find('#colors').remove()
+  } else {
+    changeTxtColor(element.parent().parent().parent().parent(), color)
+    changeTextColor.find('#colors').remove()
+  }
+  removeMenu()
+} 
 
 var changeBackgroundColor = function(element, color) {
   element.css('background', color)
