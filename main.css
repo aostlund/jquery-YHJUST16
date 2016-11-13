@@ -1,24 +1,52 @@
 #container {
     width: 500px;
     margin: auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-div {
+#container div {
+    margin: auto;
+    width: 450px;
     background: lightblue;
     font-size: 16px;
     color: #000;
+    min-height: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-p {
+#container div:hover {
+    box-shadow: 10px 0px 28px rgba(0,0,0,0.55), 0 0px 10px rgba(150,150,150,0.99);
+}
+
+#container p {
     background: lightpink;
     font-size: 13px;
+    min-height: 15px;
+    width: 450px;
     color: #000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+#container p:hover {
+    box-shadow: 10px 0px 28px rgba(0,0,0,0.55), 0 0px 10px rgba(150,150,150,0.99);
 }
 
 ul {
    list-style-type: none;
    font-size: 16px;  
    color: #000;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
 }
 
 #colors {
