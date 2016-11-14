@@ -4,6 +4,7 @@ var addText = $('<li>Change text</li>').attr('id', 'change_text')
 var changeBgColor = $('<li>Change background color</li>').attr('id', 'change_bg_color')
 var changeTextColor = $('<li>Change text color</li>').attr('id', 'change_text_color')
 var deleteElement = $('<li>Delete element</li>').attr('id', 'delete_element')
+var closeMenu = $('<li>Close Menu</li>').attr('id', 'close_menu')
 var red = $('<li></li>').attr('style', 'background: #f00').attr('id', 'red')
 var green = $('<li></li>').attr('style', 'background: #0f0').attr('id', 'green')
 var blue = $('<li></li>').attr('style', 'background: #00f').attr('id', 'blue')
@@ -24,8 +25,8 @@ $(function () {
 })
 
 var showMenu = function (element) {
-  element.append($('<ul></ul>').attr('id', 'add_ul').attr('style', 'background: grey'))
-  $('#add_ul').append(addDiv, addText, addP, changeBgColor, changeTextColor, deleteElement)
+  element.append($('<ul></ul>').attr('id', 'menu_ul').attr('style', 'background: grey'))
+  $('#menu_ul').append(addDiv, addText, addP, changeBgColor, changeTextColor, deleteElement, closeMenu)
 }
 
 var doSomething = function (element, event) {
@@ -56,6 +57,9 @@ var doSomething = function (element, event) {
         break
       }
       removeElement(element.parent().parent())
+      removeMenu()
+      break
+    case 'close_menu':
       removeMenu()
       break
     case 'change_bg_color':
@@ -135,5 +139,5 @@ var changeTxtColor = function(element, color) {
 }
 
 var removeMenu = function() {
-  $('#add_ul').remove()
+  $('#menu_ul').remove()
 }
