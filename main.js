@@ -3,6 +3,7 @@ var addP = $('<li>Add p</li>').attr('id', 'add_p')
 var addText = $('<li>Change text</li>').attr('id', 'change_text')
 var changeBgColor = $('<li>Change background color</li>').attr('id', 'change_bg_color')
 var changeTextColor = $('<li>Change text color</li>').attr('id', 'change_text_color')
+var deleteElement = $('<li>Delete element</li>').attr('id', 'delete_element')
 var red = $('<li></li>').attr('style', 'background: #f00').attr('id', 'red')
 var green = $('<li></li>').attr('style', 'background: #0f0').attr('id', 'green')
 var blue = $('<li></li>').attr('style', 'background: #00f').attr('id', 'blue')
@@ -18,16 +19,16 @@ $(function () {
     }
   })
   $('#container').on('click', 'li', function (event) {
-    addSomething($(this), event)
+    doSomething($(this), event)
   })
 })
 
 var showMenu = function (element) {
   element.append($('<ul></ul>').attr('id', 'add_ul').attr('style', 'background: grey'))
-  $('#add_ul').append(addDiv, addText, addP, changeBgColor, changeTextColor)
+  $('#add_ul').append(addDiv, addText, addP, changeBgColor, changeTextColor, deleteElement)
 }
 
-var addSomething = function (element, event) {
+var doSomething = function (element, event) {
   switch (element.attr('id')) {
     case 'add_div':
       addElement(element.parent().parent(), '<div></div>')
@@ -47,6 +48,15 @@ var addSomething = function (element, event) {
           removeMenu()
         })
       }
+      break
+    case 'delete_element':
+      if (element.parent().parent().attr('id') === 'start') {
+        alert("Can't delete the start element")
+        removeMenu()
+        break
+      }
+      removeElement(element.parent().parent())
+      removeMenu()
       break
     case 'change_bg_color':
       if (event.target.id === element.attr('id')) {
@@ -94,6 +104,15 @@ var addTxt = function (element, text) {
   var deepWithDataAndEvents = true;
   var temp = element.children().clone(withDataAndEvents, deepWithDataAndEvents) //uses clone(true, true) to make the copy contain the eventhandlers of the children
   element.text(text).append(temp)
+}
+
+var removeElement = function(element) {
+  var withDataAndEvents = true;
+  var deepWithDataAndEvents = true;
+  var temp = element.children().clone(withDataAndEvents, deepWithDataAndEvents)
+  var parent = element.parent()
+  element.remove()
+  parent.append(temp)
 }
 
 var changeColor = function(element, color) {
